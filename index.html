@@ -28,7 +28,7 @@
       <a-sky color="#111"></a-sky>
       <a-entity light="type: directional; intensity: 0.35" position="-1 1 -0.5"></a-entity>
       <a-entity light="type: directional; intensity: 0.15" position="1 -1 0.5"></a-entity>
-      <a-entity light="type: point; distance: 5; intensity: 0.3" position="0 1 0"></a-entity>
+      <a-entity light="type: point; distance: 5; intensity: 0.3" position="0 0.9 0"></a-entity>
       <!-- The Flat -->
       <a-entity ply-model="src: #FlatFloor" rotation="-90 0 0" position="0 0 0" scale="0.03 0.03 0.03"></a-entity>
       <a-entity ply-model="src: #FlatCeiling" rotation="90 0 0" position="0 1.86 0" scale="0.03 0.03 0.03"></a-entity>
@@ -37,8 +37,9 @@
       <a-entity ply-model="src: #FlatWall" rotation="0 180 0" position="0 0.93 1.395" scale="0.03 0.03 0.03"></a-entity>
       <a-entity ply-model="src: #FlatWall" rotation="0 270 0" position="1.395 0.93 0" scale="0.03 0.03 0.03"></a-entity>
       <!-- The cats -->
-      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="0 0.105 0" scale="0.03 0.03 0.03" cat="walking:true"></a-entity>
-      <a-entity ply-model="src: #Cat" rotation="-90 -70 0" position="0.5 0.105 -1" scale="0.03 0.03 0.03" cat="walking:true"></a-entity>
+      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="-0.15 0.06 0.15" scale="0.03 0.03 0.03" cat="walking:true;offset:0"></a-entity>
+      <a-entity ply-model="src: #Cat" rotation="-90 25 0" position="0.15 0.06 -0.15" scale="0.03 0.03 0.03" cat="walking:true;offset:0.5"></a-entity>
+      <a-entity ply-model="src: #Cat" rotation="-90 0 0" position="0.8 0.06 -0.05" scale="0.03 0.03 0.03" cat="walking:false"></a-entity>
     </a-scene>
     <script>
       AFRAME.registerComponent("cat", {
@@ -46,14 +47,26 @@
         schema: {
           walking: {
             default: true
+          },
+          offset: {
+            default: -1
           }
         },
+        init: function() {
+          if (this.data.offset == -1)
+            this.data.offset = Math.random();
+        },
         tick: function(time, delta) {
-          var scaledTime = time / 300.0;
-          var height = Math.sin(scaledTime * 2 * Math.PI) * 0.005 + 0.005;
-          var frame = Math.floor(scaledTime) % 2;
+          var height = 0;
           var position = this.el.getAttribute("position");
-          this.el.setAttribute("ply-model", "src: #CatW" + frame);
+          if (this.data.walking) {
+            var scaledTime = time / 300.0 + this.data.offset;
+            var frame = Math.floor(scaledTime) % 2;
+            height = Math.sin(scaledTime * 2 * Math.PI) * 0.005 + 0.005;
+            this.el.setAttribute("ply-model", "src: #CatW" + frame);
+          } else {
+            this.el.setAttribute("ply-model", "src: #Cat");
+          }
           this.el.setAttribute("position", {x : position.x, y: 0.06 + height, z: position.z});
         }
       })
