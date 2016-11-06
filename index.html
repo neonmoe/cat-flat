@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Tweaky technical stuff -->
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Tweaky technical stuff -->
+
+    <!-- Descriptiony stuff -->
+    <title>Cat Flat</title>
+    <!-- Descriptiony stuff -->
+  </head>
+  <body>
+    <!-- Enter the matri- VR -->
+    <script src="libs/aframe.min.js"></script>
+    <script src="libs/aframe-extras.min.js"></script>
+    <a-scene vr-mode-ui="enabled: true">
+      <a-assets>
+        <a-asset-item id="FlatFloor" src="mesh/FlatFloor.ply"></a-asset-item>
+        <a-asset-item id="Cat" src="mesh/Cat.ply"></a-asset-item>
+        <a-asset-item id="CatW0" src="mesh/Cat_Walk0.ply"></a-asset-item>
+        <a-asset-item id="CatW1" src="mesh/Cat_Walk1.ply"></a-asset-item>
+      </a-assets>
+      <a-entity camera="userHeight: 1" look-controls position="-0.91 0 -0.91" rotation="0 225 0"></a-entity>
+      <a-sky color="#111"></a-sky>
+      <a-entity light="type: directional" position="-1 1 -0.5"></a-entity>
+      <a-entity ply-model="src: #FlatFloor" rotation="-90 0 0" position="0 0 0" scale="0.03 0.03 0.03"></a-entity>
+      <a-entity id="Cat" ply-model="src: #Cat" rotation="-90 -110 0" position="0 0.105 0" scale="0.03 0.03 0.03" cat="walking:true"></a-entity>
+    </a-scene>
+    <script>
+      AFRAME.registerComponent("cat", {
+        dependencies: ["ply-model"],
+        schema: {
+          walking: {
+            default: true
+          }
+        },
+        tick: function(time, delta) {
+          var scaledTime = time / 300.0;
+          var height = Math.sin(scaledTime * 2 * Math.PI) * 0.005 + 0.005;
+          var frame = Math.floor(scaledTime) % 2;
+          var position = this.el.getAttribute("position");
+          this.el.setAttribute("ply-model", "src: #CatW" + frame);
+          this.el.setAttribute("position", {x : position.x, y: 0.105 + height, z: position.z});
+        }
+      })
+    </script>
+  </body>
+<html>
