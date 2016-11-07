@@ -37,39 +37,13 @@
       <a-entity ply-model="src: #FlatWall" rotation="0 180 0" position="0 0.93 1.395" scale="0.03 0.03 0.03"></a-entity>
       <a-entity ply-model="src: #FlatWall" rotation="0 270 0" position="1.395 0.93 0" scale="0.03 0.03 0.03"></a-entity>
       <!-- The cats -->
-      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="-0.15 0.06 0.15" scale="0.03 0.03 0.03" cat="walking:true;offset:0"></a-entity>
-      <a-entity ply-model="src: #Cat" rotation="-90 25 0" position="0.15 0.06 -0.15" scale="0.03 0.03 0.03" cat="walking:true;offset:0.5"></a-entity>
-      <a-entity ply-model="src: #Cat" rotation="-90 0 0" position="0.8 0.06 -0.05" scale="0.03 0.03 0.03" cat="walking:false"></a-entity>
+      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="-0.15 0.06 0.15" scale="0.03 0.03 0.03"
+                cat="walking:true;offset:0;targetPosition: -0.5 0 0.5"></a-entity>
+      <a-entity ply-model="src: #Cat" rotation="-90 25 0" position="0.15 0.06 -0.15" scale="0.03 0.03 0.03"
+                cat="walking:true;offset:0.5"></a-entity>
+      <a-entity ply-model="src: #Cat" rotation="-90 0 0" position="0.8 0.06 -0.05" scale="0.03 0.03 0.03"
+                cat="walking:false"></a-entity>
     </a-scene>
-    <script>
-      AFRAME.registerComponent("cat", {
-        dependencies: ["ply-model"],
-        schema: {
-          walking: {
-            default: true
-          },
-          offset: {
-            default: -1
-          }
-        },
-        init: function() {
-          if (this.data.offset == -1)
-            this.data.offset = Math.random();
-        },
-        tick: function(time, delta) {
-          var height = 0;
-          var position = this.el.getAttribute("position");
-          if (this.data.walking) {
-            var scaledTime = time / 300.0 + this.data.offset;
-            var frame = Math.floor(scaledTime) % 2;
-            height = Math.sin(scaledTime * 2 * Math.PI) * 0.005 + 0.005;
-            this.el.setAttribute("ply-model", "src: #CatW" + frame);
-          } else {
-            this.el.setAttribute("ply-model", "src: #Cat");
-          }
-          this.el.setAttribute("position", {x : position.x, y: 0.06 + height, z: position.z});
-        }
-      })
-    </script>
+    <script src="src/cat.js"></script>
   </body>
 <html>
