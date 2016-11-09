@@ -11,7 +11,11 @@
     <title>Cat Flat</title>
     <!-- Descriptiony stuff -->
   </head>
-  <body>
+  <body style="background-color:#000000;color:#EEEEEE;width:100%;height:100%">
+    <!-- Stuff to show while not in VR -->
+    <div id="notInVr" style="font-family:monospace;display:flex;flex-flow:row wrap;justify-content:space-around;align-items:center;">
+      <h1>VR content revving up, hold on...</h1>
+    </div>
     <!-- Enter the matri- VR -->
     <script src="libs/aframe.min.js"></script>
     <script src="libs/aframe-extras.min.js"></script>
@@ -45,5 +49,16 @@
                 cat="walking:false"></a-entity>
     </a-scene>
     <script src="src/cat.js"></script>
+    <script>
+      var scene = document.querySelector('a-scene');
+      if (scene.hasLoaded) {
+        run();
+      } else {
+        scene.addEventListener('loaded', run);
+      }
+      function run () {
+        document.querySelector("#notInVr").style.display = "none";
+      }
+    </script>
   </body>
 <html>
