@@ -17,7 +17,7 @@ AFRAME.registerComponent("catanim", {
       this.el.setAttribute("ply-model", "src: #CatW" + frame);
 
       var position = this.el.getAttribute("position");
-      position.y = 0.06 + Math.sin(scaledTime * 2 * Math.PI) * 0.01 + 0.01;
+      position.y = Math.sin(scaledTime * 2 * Math.PI) * 0.01 + 0.01;
       this.el.setAttribute("position", position);
     } else {
       this.el.setAttribute("ply-model", "src: #Cat");

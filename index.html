@@ -21,27 +21,34 @@
     <script src="libs/aframe-extras.min.js"></script>
     <a-scene vr-mode-ui="enabled: true">
       <a-assets>
-        <a-asset-item id="FlatFloor" src="mesh/FlatFloor.ply"></a-asset-item>
-        <a-asset-item id="FlatCeiling" src="mesh/FlatCeiling.ply"></a-asset-item>
-        <a-asset-item id="FlatWall" src="mesh/FlatWall.ply"></a-asset-item>
-        <a-asset-item id="Cat" src="mesh/Cat.ply"></a-asset-item>
-        <a-asset-item id="CatW0" src="mesh/Cat_Walk0.ply"></a-asset-item>
-        <a-asset-item id="CatW1" src="mesh/Cat_Walk1.ply"></a-asset-item>
+        <a-asset-item id="FlatFloor"   src="assets/mesh/FlatFloor.ply"></a-asset-item>
+        <a-asset-item id="FlatCeiling" src="assets/mesh/FlatCeiling.ply"></a-asset-item>
+        <a-asset-item id="FlatWall"    src="assets/mesh/FlatWall.ply"></a-asset-item>
+        <a-asset-item id="Cat"         src="assets/mesh/Cat.ply"></a-asset-item>
+        <a-asset-item id="CatW0"       src="assets/mesh/Cat_Walk0.ply"></a-asset-item>
+        <a-asset-item id="CatW1"       src="assets/mesh/Cat_Walk1.ply"></a-asset-item>
+        <a-asset-item id="FoodFull"    src="assets/mesh/FoodFull.ply"></a-asset-item>
+        <a-asset-item id="FoodMidFull" src="assets/mesh/FoodMidFull.ply"></a-asset-item>
+        <a-asset-item id="FoodEmpty"   src="assets/mesh/FoodEmpty.ply"></a-asset-item>
       </a-assets>
-      <a-entity camera="userHeight: .75" look-controls position="-0.91 0 -0.91" rotation="0 225 0"></a-entity>
+      <a-entity camera="user-height:1" look-controls></a-entity>
       <a-sky color="#111"></a-sky>
-      <a-entity light="type: directional; intensity: 0.35" position="-1 1 -0.5"></a-entity>
-      <a-entity light="type: directional; intensity: 0.15" position="1 -1 0.5"></a-entity>
+      <a-entity light="type: directional; intensity: 0.35"       position="-1 1 -0.5"></a-entity>
+      <a-entity light="type: directional; intensity: 0.15"       position="1 -1 0.5"></a-entity>
       <a-entity light="type: point; distance: 5; intensity: 0.3" position="0 0.9 0"></a-entity>
       <!-- The Flat -->
-      <a-entity ply-model="src: #FlatFloor" rotation="-90 0 0" position="0 0 0" scale="0.03 0.03 0.03"></a-entity>
-      <a-entity ply-model="src: #FlatCeiling" rotation="90 0 0" position="0 1.86 0" scale="0.03 0.03 0.03"></a-entity>
-      <a-entity ply-model="src: #FlatWall" rotation="0 0 0" position="0 0.93 -1.395" scale="0.03 0.03 0.03"></a-entity>
-      <a-entity ply-model="src: #FlatWall" rotation="0 90 0" position="-1.395 0.93 0" scale="0.03 0.03 0.03"></a-entity>
-      <a-entity ply-model="src: #FlatWall" rotation="0 180 0" position="0 0.93 1.395" scale="0.03 0.03 0.03"></a-entity>
-      <a-entity ply-model="src: #FlatWall" rotation="0 270 0" position="1.395 0.93 0" scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FlatFloor"   rotation="-90 0 0" position="0 -0.06 0"         scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FlatCeiling" rotation="90 0 0"  position="0 1.8 0"      scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FlatWall"    rotation="0 0 0"   position="0 0.87 -1.395" scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FlatWall"    rotation="0 90 0"  position="-1.395 0.87 0" scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FlatWall"    rotation="0 180 0" position="0 0.87 1.395"  scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FlatWall"    rotation="0 270 0" position="1.395 0.87 0"  scale="0.03 0.03 0.03"></a-entity>
+      <!-- The food -->
+      <a-entity ply-model="src: #FoodFull"    rotation="-90 0 0" position = "-0.9 0 0.75" scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FoodMidFull" rotation="-90 0 0" position = "-0.9 0 0.45" scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FoodEmpty"   rotation="-90 0 0" position = "-0.9 0 0.15" scale="0.03 0.03 0.03"></a-entity>
       <!-- The cats -->
-      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="0 0.06 0" scale="0.03 0.03 0.03"
+      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="0 0 0" scale="0.03 0.03 0.03"
                 catmove catanim catai confined></a-entity>
     </a-scene>
     <script src="src/utils.js"></script>
