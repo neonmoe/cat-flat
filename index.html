@@ -41,14 +41,14 @@
       <a-entity ply-model="src: #FlatWall" rotation="0 180 0" position="0 0.93 1.395" scale="0.03 0.03 0.03"></a-entity>
       <a-entity ply-model="src: #FlatWall" rotation="0 270 0" position="1.395 0.93 0" scale="0.03 0.03 0.03"></a-entity>
       <!-- The cats -->
-      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="-0.15 0.06 0.15" scale="0.03 0.03 0.03"
-                cat="walking:true;offset:0;targetPosition: -0.5 0 0.5"></a-entity>
-      <a-entity ply-model="src: #Cat" rotation="-90 25 0" position="0.15 0.06 -0.15" scale="0.03 0.03 0.03"
-                cat="walking:true;offset:0.5"></a-entity>
-      <a-entity ply-model="src: #Cat" rotation="-90 0 0" position="0.8 0.06 -0.05" scale="0.03 0.03 0.03"
-                cat="walking:false"></a-entity>
+      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="0 0.06 0" scale="0.03 0.03 0.03"
+                catmove catanim catai confined></a-entity>
     </a-scene>
-    <script src="src/cat.js"></script>
+    <script src="src/utils.js"></script>
+    <script src="src/confined.js"></script>
+    <script src="src/catmove.js"></script>
+    <script src="src/catanim.js"></script>
+    <script src="src/catai.js"></script>
     <script>
       var scene = document.querySelector('a-scene');
       if (scene.hasLoaded) {
