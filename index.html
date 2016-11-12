@@ -19,7 +19,7 @@
     <!-- Enter the matri- VR -->
     <script src="libs/aframe.min.js"></script>
     <script src="libs/aframe-extras.min.js"></script>
-    <a-scene vr-mode-ui="enabled: true">
+    <a-scene vr-mode-ui="enabled: true" style="display:none">
       <a-assets>
         <a-asset-item id="FlatFloor"   src="assets/mesh/FlatFloor.ply"></a-asset-item>
         <a-asset-item id="FlatCeiling" src="assets/mesh/FlatCeiling.ply"></a-asset-item>
@@ -37,34 +37,41 @@
       <a-entity light="type: directional; intensity: 0.15"       position="1 -1 0.5"></a-entity>
       <a-entity light="type: point; distance: 5; intensity: 0.3" position="0 0.9 0"></a-entity>
       <!-- The Flat -->
-      <a-entity ply-model="src: #FlatFloor"   rotation="-90 0 0" position="0 -0.06 0"         scale="0.03 0.03 0.03"></a-entity>
-      <a-entity ply-model="src: #FlatCeiling" rotation="90 0 0"  position="0 1.8 0"      scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FlatFloor"   rotation="-90 0 0" position="0 -0.06 0"     scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FlatCeiling" rotation="90 0 0"  position="0 1.8 0"       scale="0.03 0.03 0.03"></a-entity>
       <a-entity ply-model="src: #FlatWall"    rotation="0 0 0"   position="0 0.87 -1.395" scale="0.03 0.03 0.03"></a-entity>
       <a-entity ply-model="src: #FlatWall"    rotation="0 90 0"  position="-1.395 0.87 0" scale="0.03 0.03 0.03"></a-entity>
       <a-entity ply-model="src: #FlatWall"    rotation="0 180 0" position="0 0.87 1.395"  scale="0.03 0.03 0.03"></a-entity>
       <a-entity ply-model="src: #FlatWall"    rotation="0 270 0" position="1.395 0.87 0"  scale="0.03 0.03 0.03"></a-entity>
       <!-- The food -->
-      <a-entity ply-model="src: #FoodFull"    rotation="-90 0 0" position = "-0.9 0 0.75" scale="0.03 0.03 0.03"></a-entity>
-      <a-entity ply-model="src: #FoodMidFull" rotation="-90 0 0" position = "-0.9 0 0.45" scale="0.03 0.03 0.03"></a-entity>
-      <a-entity ply-model="src: #FoodEmpty"   rotation="-90 0 0" position = "-0.9 0 0.15" scale="0.03 0.03 0.03"></a-entity>
+      <a-entity ply-model="src: #FoodFull"    rotation="-90 0 0" position = "-0.91 0  0.91" scale="0.03 0.03 0.03"
+                food></a-entity>
+      <a-entity ply-model="src: #FoodFull"    rotation="-90 0 0" position = "-0.91 0 -0.91" scale="0.03 0.03 0.03"
+                food></a-entity>
+      <a-entity ply-model="src: #FoodFull"    rotation="-90 0 0" position = "0.91  0  0.91" scale="0.03 0.03 0.03"
+                food></a-entity>
+      <a-entity ply-model="src: #FoodFull"    rotation="-90 0 0" position = "0.91  0 -0.91" scale="0.03 0.03 0.03"
+                food></a-entity>
       <!-- The cats -->
       <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="0 0 0" scale="0.03 0.03 0.03"
                 catmove catanim catai confined></a-entity>
     </a-scene>
     <script src="src/utils.js"></script>
     <script src="src/confined.js"></script>
+    <script src="src/food.js"></script>
     <script src="src/catmove.js"></script>
     <script src="src/catanim.js"></script>
     <script src="src/catai.js"></script>
     <script>
-      var scene = document.querySelector('a-scene');
+      var scene = document.querySelector("a-scene");
       if (scene.hasLoaded) {
         run();
       } else {
-        scene.addEventListener('loaded', run);
+        scene.addEventListener("loaded", run);
       }
       function run () {
         document.querySelector("#notInVr").style.display = "none";
+        document.querySelector("a-scene").style.display = "";
       }
     </script>
   </body>

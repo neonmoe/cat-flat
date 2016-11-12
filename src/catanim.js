@@ -11,11 +11,10 @@ AFRAME.registerComponent("catanim", {
   },
   tick: function(time, delta) {
     var height = 0;
+    var scaledTime = time / 150.0 + this.data.offset;
+    var frame = Math.floor(scaledTime);
     if (this.el.getComputedAttribute("catmove").walking) {
-      var scaledTime = time / 150.0 + this.data.offset;
-      var frame = Math.floor(scaledTime) % 2;
-      this.el.setAttribute("ply-model", "src: #CatW" + frame);
-
+      this.el.setAttribute("ply-model", "src: #CatW" + (frame % 2));
       var position = this.el.getAttribute("position");
       position.y = Math.sin(scaledTime * 2 * Math.PI) * 0.01 + 0.01;
       this.el.setAttribute("position", position);

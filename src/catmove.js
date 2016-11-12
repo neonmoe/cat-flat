@@ -8,6 +8,9 @@ AFRAME.registerComponent("catmove", {
       type: "vec3",
       default: { x: -1, y: -1, z: -1 }
     },
+    targetReachDistance: {
+      default: 0.01
+    },
     moveSpeed: {
       default: 1
     }
@@ -18,7 +21,7 @@ AFRAME.registerComponent("catmove", {
       this.data.targetPosition = this.el.getAttribute("position");
   },
   tick: function(time, delta) {
-    delta = clamp(delta / 1000.0, 0.001, 0.03);
+    delta = processDelta(delta);
     // Get position and rotation so changes can be applied
     var position = this.el.getAttribute("position");
     var rotation = this.el.getAttribute("rotation");
@@ -27,22 +30,20 @@ AFRAME.registerComponent("catmove", {
                 z: this.data.targetPosition.z - position.z};
     if (move.x != 0 || move.z != 0) {
       var len = Math.sqrt(move.x * move.x + move.z * move.z);
-      if (len < 0.1) {
-        position = this.data.targetPosition;
+      if (len < this.data.targetReachDistance) {
+        var tp = this.data.targetPosition;
         this.data.walking = false;
       } else {
         var normMove = {x: move.x / len, z: move.z / len};
-        var scaledMove = {x: this.data.moveSpeed * normMove.x * (delta),
-                          z: this.data.moveSpeed * normMove.z * (delta)};
-        this.data.walking = true;
-        position.x += scaledMove.x;
-        position.z += scaledMove.z;
         var angle = 180 * Math.atan2(normMove.x, normMove.z) / Math.PI + 90;
         var rotationSign = angle - rotation.y > 0 ? 1 : -1;
         rotation.y += (rotationSign) * delta * 720.0;
         if ((rotationSign > 0) != (angle - rotation.y > 0)) {
           rotation.y = angle;
         }
+        position.x += ((Math.sin(angle) + normMove.x) / 2) * this.data.moveSpeed * delta;
+        position.z += ((Math.cos(angle) + normMove.z) / 2) * this.data.moveSpeed * delta;
+        this.data.walking = true;
       }
     } else {
       this.data.walking = false;
@@ -50,6 +51,6 @@ AFRAME.registerComponent("catmove", {
 
     // Apply changes to position and rotation
     this.el.setAttribute("position", {x: position.x, y: position.y, z: position.z});
-    this.el.setAttribute("rotation", {x: rotation.x, y: rotation.y, z: rotation.z})
+    this.el.setAttribute("rotation", {x: rotation.x, y: rotation.y, z: rotation.z});
   }
 });
