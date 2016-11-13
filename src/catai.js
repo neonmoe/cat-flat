@@ -19,6 +19,8 @@ AFRAME.registerComponent("catai", {
     delta = processDelta(delta);
     if (!this.data.alive) {
       position.y += delta * position.y;
+      position.x += Math.sin(time / 1000.0 * Math.PI) * delta * (position.y / 5);
+      position.z += Math.cos(time / 1000.0 * Math.PI) * delta * (position.y / 5);
       this.el.setAttribute("position", position);
       return;
     }

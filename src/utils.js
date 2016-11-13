@@ -2,6 +2,13 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
+function len(vec) {
+  vec.x = vec.x || 0;
+  vec.y = vec.y || 0;
+  vec.z = vec.z || 0;
+  return ;
+}
+
 function processDelta(delta) {
   return Math.min(delta / 1000.0, 0.03);
 }
@@ -22,9 +29,31 @@ function spawnCat(position, rotation) {
               ["catmove", ""], ["catanim", ""], ["catai", ""], ["confined", ""]]);
 }
 
+var spawnedFoodPositions = [];
 function spawnFood(position, rotation) {
-  position = position || {x: (Math.random() - 0.5) * 0.75 + (Math.floor(Math.random() * 3) - 1) * 0.91,
-                    y: 0, z: (Math.random() - 0.5) * 0.75 + (Math.floor(Math.random() * 3) - 1) * 0.91};
+  function genPosition() {
+    return {x: (Math.random() - 0.5) * 0.6 + (Math.floor(Math.random() * 3) - 1) * 0.91,
+      y: 0, z: (Math.random() - 0.5) * 0.6 + (Math.floor(Math.random() * 3) - 1) * 0.91};
+  }
+  position = position || genPosition();
+  // If a proper position can't be found in 100 tries, the position might as
+  // well be not proper, because someone screwed up somewhere.
+  for (var i = 0; i < 100; i++) {
+    var notCloseToAnything = true;
+    for (var j = 0; j < spawnedFoodPositions.length; j++) {
+      var delta = {x: spawnedFoodPositions[j].x - position.x, z: spawnedFoodPositions[j].z - position.z};
+      if (Math.sqrt(delta.x * delta.x + delta.z * delta.z) < 0.3) {
+        notCloseToAnything = false;
+        break;
+      }
+    }
+    if (notCloseToAnything) {
+      break;
+    } else {
+      position = genPosition();
+    }
+  }
+  spawnedFoodPositions.push(position);
   rotation = rotation || {x: 0, y: Math.floor(Math.random() * 8) * 45, z: 0};
   spawnEntity([["collada-model", "#Food"], ["position", {x: position.x, y: 0.0249, z: position.z}],
               ["rotation", rotation], ["food", ""]]);
