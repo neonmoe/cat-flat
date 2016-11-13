@@ -32,7 +32,12 @@
         <a-asset-item id="FoodCup" src="assets/mesh/FoodCup.dae"></a-asset-item>
         <a-asset-item id="Food" src="assets/mesh/Food.dae"></a-asset-item>
       </a-assets>
-      <a-entity camera="user-height:1" look-controls wasd-controls></a-entity>
+      <a-entity id="playerCam" camera="userHeight:1" look-controls wasd-controls>
+        <a-entity cursor="fuseTimeout: 500" position="0 0 -1" scale="1 1 1"
+                  geometry="primitive:ring;radiusInner:0.01;radiusOuter:0.02"
+                  material="color:black;shader:flat">
+        </a-entity>
+      </a-entity>
       <a-sky color="#200803"></a-sky>
       <a-entity light="type: directional; intensity: 0.3" position="1 1 1"></a-entity>
       <a-entity light="type: directional; intensity: 0.45" position="-1 -1 -1"></a-entity>
@@ -46,11 +51,11 @@
       <a-entity collada-model="#Ceiling" position="0 2.5 0"></a-entity>
       <!-- The food -->
       <a-entity collada-model="#FoodCup" position = "-0.91 0  0.91"></a-entity>
-      <a-entity collada-model="#Food" position = "-0.91 0.024  0.91"
-                food></a-entity>
+      <a-entity collada-model="#Food" position = "-0.91 0.024  0.91" food></a-entity>
       <!-- The cats -->
       <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="0 0 0" scale="0.02 0.02 0.02"
-                catmove catanim catai confined></a-entity>
+                catmove catanim catai confined>
+      </a-entity>
     </a-scene>
     <!-- Load up the game -->
     <script src="src/utils.js"></script>
@@ -70,6 +75,12 @@
         document.querySelector("#notInVr").style.display = "none";
         document.querySelector("a-scene").style.display = "";
       }
+      var cam = document.querySelector("#playerCam");
+      document.addEventListener("keydown", function(key) {
+        if (key.keyCode == 17 || key.keyCode == 67) {
+          cam.setAttribute("camera", "userHeight", cam.getComputedAttribute("camera").userHeight == 1 ? .3 : 1);
+        }
+      });
     </script>
   </body>
 <html>
