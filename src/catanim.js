@@ -1,9 +1,7 @@
 AFRAME.registerComponent("catanim", {
   dependencies: ["ply-model", "position"],
   schema: {
-    offset: {
-      default: -1
-    }
+    offset: { default: -1 }
   },
   init: function() {
     if (this.data.offset == -1)
@@ -19,7 +17,12 @@ AFRAME.registerComponent("catanim", {
       position.y = Math.sin(scaledTime * 2 * Math.PI) * 0.01 + 0.01;
       this.el.setAttribute("position", position);
     } else {
-      this.el.setAttribute("ply-model", "src: #Cat");
+      var aiActivity = this.el.getComputedAttribute("catai").activity;
+      if (aiActivity == "eating" || aiActivity == "sitting") {
+        this.el.setAttribute("ply-model", "src: #CatSit");
+      } else {
+        this.el.setAttribute("ply-model", "src: #Cat");
+      }
     }
   }
 });

@@ -2,12 +2,8 @@ var foods = [];
 AFRAME.registerComponent("food", {
   dependencies: ["ply-model", "position"],
   schema: {
-    amount: {
-      default: 2.0
-    },
-    maxAmount: {
-      default: 2.0
-    }
+    amount: { default: 5.0 },
+    maxAmount: { default: 5.0 }
   },
   init: function() {
     this.data.maxAmount = this.data.amount;

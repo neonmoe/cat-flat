@@ -1,19 +1,13 @@
 AFRAME.registerComponent("catmove", {
   dependencies: ["position", "rotation"],
   schema: {
-    walking: {
-      default: true
-    },
+    walking: { default: true },
     targetPosition: {
       type: "vec3",
       default: { x: -1, y: -1, z: -1 }
     },
-    targetReachDistance: {
-      default: 0.01
-    },
-    moveSpeed: {
-      default: 1
-    }
+    targetReachDistance: { default: 0.01 },
+    moveSpeed: { default: 1 }
   },
   init: function() {
     if (this.data.targetPosition.x == -1 && this.data.targetPosition.y == -1
