@@ -9,16 +9,21 @@ AFRAME.registerComponent("catai", {
     eatingSpeed: { default: 10 },
     activity: { default: "idle" },
     boredness: { default: 1 },
-    boredDelta: { default: 1 }
+    boredDelta: { default: 1 },
+    alive: { default: true }
   },
   init: function() {
   },
   tick: function(time, delta) {
+    if (!this.data.alive) {
+      return;
+    }
     delta = processDelta(delta);
     var position = this.el.getAttribute("position");
     this.data.hunger -= delta * this.data.hungerDelta;
     this.data.boredness += delta * this.data.boredDelta;
 
+    // Reconsider activities possibly
     // 10% * boredness chance to reconsider activity every second
     if (this.data.boredness * delta * Math.random() > 0.1 ||
         // Reconsider if...
@@ -64,6 +69,8 @@ AFRAME.registerComponent("catai", {
       }
     }
 
+    // Implement activities
+    // Eating
     if (this.data.activity == "eating" && this.data.targetFood != null) {
       var foodAmount = this.data.targetFood.getComputedAttribute("food").amount;
       if (foodAmount > 0) {
@@ -81,9 +88,16 @@ AFRAME.registerComponent("catai", {
         this.data.targetFood = null;
       }
     }
+    // Wandering
     if (this.data.activity == "wandering" && !this.el.getComputedAttribute("catmove").walking) {
       this.el.setAttribute("catmove", "targetPosition", {x: (Math.random() - 0.5) * 2, z: (Math.random() - 0.5) * 2});
       this.el.setAttribute("catmove", "targetReachDistance", 0.1);
+    }
+
+    // Test if dead
+    if (this.data.hunger <= 0) {
+      this.data.alive = false;
+      this.el.setAttribute("catmove", "targetPosition", {x: position.x, z: position.z});
     }
   }
 });

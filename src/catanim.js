@@ -8,6 +8,11 @@ AFRAME.registerComponent("catanim", {
       this.data.offset = Math.random();
   },
   tick: function(time, delta) {
+    var ai = this.el.getComputedAttribute("catai");
+    if (!ai.alive) {
+      this.el.setAttribute("ply-model", "src: #CatDead");
+      return;
+    }
     var height = 0;
     var scaledTime = time / 150.0 + this.data.offset;
     var frame = Math.floor(scaledTime);
@@ -17,7 +22,7 @@ AFRAME.registerComponent("catanim", {
       position.y = Math.sin(scaledTime * 2 * Math.PI) * 0.01 + 0.01;
       this.el.setAttribute("position", position);
     } else {
-      var aiActivity = this.el.getComputedAttribute("catai").activity;
+      var aiActivity = ai.activity;
       if (aiActivity == "eating" || aiActivity == "sitting") {
         this.el.setAttribute("ply-model", "src: #CatSit");
       } else {
