@@ -24,9 +24,22 @@ function spawnEntity(attribs) {
 function spawnCat(position, rotation) {
   position = position || {x: (Math.random() - 0.5) * 2, y: 0, z: (Math.random() - 0.5) * 2};
   rotation = rotation || {x: -90, y: Math.random() * 360, z: 0};
+  var hungerDelta = 0.05 + Math.random() * 0.2;
+  var eatingSpeed = 0.5 + Math.random() * 1.2;
+  var boredDelta = 0.2 + Math.random() * 3.0;
+  var hungerSatiated = 1.25 + Math.random() * 4.0;
+  var hungerThreshold = 0.6 + Math.random() * 0.7;
+  var hunger = 0.8 + Math.random() * 1.2;
   spawnEntity([["ply-model", "src: #Cat"], ["position", position],
               ["rotation", rotation], ["scale", {x: 0.02, y: 0.02, z: 0.02}],
-              ["catmove", ""], ["catanim", ""], ["catai", ""], ["confined", ""]]);
+              ["catmove", ""], ["catanim", ""],
+              ["catai", "hungerDelta: " + hungerDelta +
+                        ";eatingSpeed: " + eatingSpeed +
+                        ";boredDelta: " + boredDelta +
+                        ";hungerSatiated: " + hungerSatiated +
+                        ";hungerThreshold: " + hungerThreshold +
+                        ";hunger: " + hunger],
+              ["confined", ""]]);
 }
 
 var spawnedFoodPositions = [];

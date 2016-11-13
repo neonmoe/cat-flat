@@ -29,5 +29,8 @@ AFRAME.registerComponent("catanim", {
         this.el.setAttribute("ply-model", "src: #Cat");
       }
     }
+    // Set the cat's size to correspond with its hungriness
+    var scale = 0.02 * (0.5 + ai.hunger / 2);
+    this.el.setAttribute("scale", {x: scale, y: scale, z: scale})
   }
 });
