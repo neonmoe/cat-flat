@@ -4,6 +4,9 @@ AFRAME.registerComponent("food", {
   schema: {
     amount: {
       default: 2.0
+    },
+    maxAmount: {
+      default: 2.0
     }
   },
   init: function() {
@@ -11,12 +14,6 @@ AFRAME.registerComponent("food", {
     foods.push(this.el);
   },
   tick: function(time, delta) {
-    if (this.data.amount >= this.data.maxAmount * 0.75) {
-      this.el.setAttribute("ply-model", "src: #FoodFull");
-    } else if (this.data.amount > 0) {
-      this.el.setAttribute("ply-model", "src: #FoodMidFull");
-    } else {
-      this.el.setAttribute("ply-model", "src: #FoodEmpty");
-    }
+    this.el.setAttribute("scale", {x: 1, y: Math.floor(10.0 * (this.data.amount / this.data.maxAmount)) / 10.0, z: 1})
   }
 });

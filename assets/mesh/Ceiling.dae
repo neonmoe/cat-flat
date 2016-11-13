@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8</authoring_tool>
+    </contributor>
+    <created>2016-11-13T14:42:09</created>
+    <modified>2016-11-13T14:42:09</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images/>
+  <library_effects>
+    <effect id="Ceiling-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.3419144 0.004391442 0.004391442 1</color>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="CeilingDark-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.02624122 0.008023192 9.10581e-4 1</color>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="Ceiling-material" name="Ceiling">
+      <instance_effect url="#Ceiling-effect"/>
+    </material>
+    <material id="CeilingDark-material" name="CeilingDark">
+      <instance_effect url="#CeilingDark-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Cube-mesh" name="Cube">
+      <mesh>
+        <source id="Cube-mesh-positions">
+          <float_array id="Cube-mesh-positions-array" count="114">1.365 1.365 0 1.365 -1.365 0 -1.365 -1.365 0 -1.365 1.365 0 -0.3412503 -1.365 0 -0.3412498 1.365 0 0.3412501 1.365 0 0.3412498 -1.365 0 -0.6756753 -1.365 0 -0.6756747 1.365 0 -0.6893247 1.365 0 -0.6893253 -1.365 0 -0.006825208 -1.365 0 -0.006824851 1.365 0 0.006825089 1.365 0 0.006824731 -1.365 0 0.675675 1.365 0 0.6756748 -1.365 0 0.6893249 -1.365 0 0.689325 1.365 0 -0.6756753 -1.365 0.004999995 -0.6825003 -1.365 0.004999995 0.6893249 -1.365 0.004999995 0.6824998 -1.365 0.004999995 -2.38419e-7 -1.365 0.004999995 1.19209e-7 1.365 0.004999995 0.006825089 1.365 0.004999995 -0.6756747 1.365 0.004999995 -0.6824997 1.365 0.004999995 0.6825 1.365 0.004999995 0.689325 1.365 0.004999995 0.006824731 -1.365 0.004999995 -0.6893247 1.365 0.004999995 -0.6893253 -1.365 0.004999995 -0.006825208 -1.365 0.004999995 -0.006824851 1.365 0.004999995 0.675675 1.365 0.004999995 0.6756748 -1.365 0.004999995</float_array>
+          <technique_common>
+            <accessor source="#Cube-mesh-positions-array" count="38" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube-mesh-normals">
+          <float_array id="Cube-mesh-normals-array" count="33">0 0 -1 -1 1.30594e-7 0 -1 0 0 -1 2.04686e-7 0 1 -2.04686e-7 0 1 0 0 1 -1.31127e-7 0 -1 1.31127e-7 0 -1 0 0 -1 2.38801e-7 0 1 -1.30594e-7 0</float_array>
+          <technique_common>
+            <accessor source="#Cube-mesh-normals-array" count="11" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Cube-mesh-vertices">
+          <input semantic="POSITION" source="#Cube-mesh-positions"/>
+        </vertices>
+        <polylist material="Ceiling-material" count="12">
+          <input semantic="VERTEX" source="#Cube-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Cube-mesh-normals" offset="1"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>11 0 3 0 10 0 12 0 5 0 13 0 17 0 6 0 16 0 4 0 9 0 5 0 7 0 14 0 6 0 0 0 18 0 19 0 11 0 2 0 3 0 12 0 4 0 5 0 17 0 7 0 6 0 4 0 8 0 9 0 7 0 15 0 14 0 0 0 1 0 18 0</p>
+        </polylist>
+        <polylist material="CeilingDark-material" count="24">
+          <input semantic="VERTEX" source="#Cube-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Cube-mesh-normals" offset="1"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>15 1 26 1 14 1 18 2 30 2 19 2 8 3 27 3 9 3 20 0 28 0 27 0 22 0 29 0 30 0 31 0 25 0 26 0 21 0 32 0 28 0 24 0 35 0 25 0 23 0 36 0 29 0 10 4 33 4 11 4 16 5 37 5 17 5 13 6 34 6 12 6 15 7 31 7 26 7 18 8 22 8 30 8 8 9 20 9 27 9 20 0 21 0 28 0 22 0 23 0 29 0 31 0 24 0 25 0 21 0 33 0 32 0 24 0 34 0 35 0 23 0 37 0 36 0 10 4 32 4 33 4 16 5 36 5 37 5 13 10 35 10 34 10</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Cube" name="Cube" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Cube-mesh" name="Cube">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Ceiling-material" target="#Ceiling-material"/>
+              <instance_material symbol="CeilingDark-material" target="#CeilingDark-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
