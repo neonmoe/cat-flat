@@ -6,7 +6,7 @@ AFRAME.registerComponent("catai", {
     hungerThreshold: { default: 1.0 },
     hungerSatiated: { default: 3.0 },
     targetFood: { },
-    eatingSpeed: { default: 10 },
+    eatingSpeed: { default: 1 },
     activity: { default: "idle" },
     boredness: { default: 1 },
     boredDelta: { default: 1 },
