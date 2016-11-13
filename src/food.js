@@ -9,6 +9,7 @@ AFRAME.registerComponent("food", {
   init: function() {
     this.data.maxAmount = this.data.amount;
     foods.push(this.el);
+    console.log("Spawnd food " + (foods.length - 1));
     this.el.addEventListener("click", function() {
       this.setAttribute("food", "amount", this.getComputedAttribute("food").maxAmount);
       console.log("Food filled!");
@@ -19,11 +20,9 @@ AFRAME.registerComponent("food", {
   }
 });
 AFRAME.registerComponent("foodcup", {
-  schema: {
-    default: 0
-  },
   init: function() {
-    var id = this.data;
+    var id = foods.length - 1;
+    console.log("Spawnd foodcup " + id);
     this.el.addEventListener("click", function() {
       foods[id].setAttribute("food", "amount", foods[id].getComputedAttribute("food").maxAmount);
       console.log("Food filled!");

@@ -34,8 +34,8 @@
       </a-assets>
       <a-entity id="playerCam" camera="userHeight:1" look-controls wasd-controls>
         <a-entity cursor="fuseTimeout: 500" position="0 0 -0.01" scale="1 1 1"
-                  geometry="primitive:ring;radiusInner:0.00006;radiusOuter:0.00012"
-                  material="color:white;shader:flat">
+                  geometry="primitive:ring;radiusInner:0.000001;radiusOuter:0.0001"
+                  material="color:#888;shader:flat">
         </a-entity>
       </a-entity>
       <a-sky color="#200803"></a-sky>
@@ -49,13 +49,6 @@
       <a-entity collada-model="#Wall"  position="0 0  1.365" rotation="0 180 0"></a-entity>
       <a-entity collada-model="#Wall"  position=" 1.365 0 0" rotation="0 270 0"></a-entity>
       <a-entity collada-model="#Ceiling" position="0 2.5 0"></a-entity>
-      <!-- The food -->
-      <a-entity collada-model="#FoodCup" position="-0.91 0 0.91" foodcup="0"></a-entity>
-      <a-entity collada-model="#Food" position="-0.91 0.024 0.91" food></a-entity>
-      <!-- The cats -->
-      <a-entity ply-model="src: #Cat" rotation="-90 -110 0" position="0 0 0" scale="0.02 0.02 0.02"
-                catmove catanim catai confined>
-      </a-entity>
     </a-scene>
     <!-- Load up the game -->
     <script src="src/utils.js"></script>
@@ -74,6 +67,7 @@
       function run () {
         document.querySelector("#notInVr").style.display = "none";
         document.querySelector("a-scene").style.display = "";
+        for (var i = 0; i < 5; i++) spawnFood();
         for (var i = 0; i < 10; i++) spawnCat();
       }
       var cam = document.querySelector("#playerCam");

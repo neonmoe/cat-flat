@@ -8,7 +8,7 @@ AFRAME.registerComponent("catai", {
     targetFood: { },
     eatingSpeed: { default: 1 },
     activity: { default: "idle" },
-    boredness: { default: 1 },
+    boredness: { default: 100 },
     boredDelta: { default: 1 },
     alive: { default: true }
   },

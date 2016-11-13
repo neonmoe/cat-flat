@@ -21,3 +21,12 @@ function spawnCat(position, rotation) {
               ["rotation", rotation], ["scale", {x: 0.02, y: 0.02, z: 0.02}],
               ["catmove", ""], ["catanim", ""], ["catai", ""], ["confined", ""]]);
 }
+
+function spawnFood(position, rotation) {
+  position = position || {x: (Math.random() - 0.5) * 2, y: 0, z: (Math.random() - 0.5) * 2};
+  rotation = rotation || {x: 0, y: Math.random() * 360, z: 0};
+  spawnEntity([["collada-model", "#Food"], ["position", {x: position.x, y: 0.0249, z: position.z}],
+              ["rotation", rotation], ["food", ""]]);
+  spawnEntity([["collada-model", "#FoodCup"], ["position", position],
+              ["rotation", rotation], ["foodcup", ""]]);
+}
