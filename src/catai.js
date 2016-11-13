@@ -15,11 +15,13 @@ AFRAME.registerComponent("catai", {
   init: function() {
   },
   tick: function(time, delta) {
+    var position = this.el.getAttribute("position");
+    delta = processDelta(delta);
     if (!this.data.alive) {
+      position.y += delta * position.y;
+      this.el.setAttribute("position", position);
       return;
     }
-    delta = processDelta(delta);
-    var position = this.el.getAttribute("position");
     this.data.hunger -= delta * this.data.hungerDelta;
     this.data.boredness += delta * this.data.boredDelta;
 
@@ -32,7 +34,7 @@ AFRAME.registerComponent("catai", {
         // Currently not eating but hungry
         (this.data.activity != "eating" && this.data.hunger < this.data.hungerThreshold) ||
         // Currently eating but no food in current target food cup
-        (this.data.activity == "eating" && this.data.hunger < this.data.hungerThreshold && this.data.targetFood == null)) {
+        (this.data.activity == "eating" && this.data.targetFood == null)) {
       var activityReconsidered = false;
       this.data.boredness = 0;
       if (this.data.hunger < this.data.hungerThreshold) {
