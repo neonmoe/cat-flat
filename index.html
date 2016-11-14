@@ -67,13 +67,20 @@
       function run () {
         document.querySelector("#notInVr").style.display = "none";
         document.querySelector("a-scene").style.display = "";
-        for (var i = 0; i < 5; i++) spawnFood();
-        for (var i = 0; i < 10; i++) spawnCat();
+        var foodCount = 3 + Math.floor(Math.random() * 6);
+        var catCount = 3 + Math.floor(Math.random() * 8);
+        for (var i = 0; i < foodCount; i++) spawnFood();
+        for (var i = 0; i < catCount; i++) spawnCat();
       }
       var cam = document.querySelector("#playerCam");
       document.addEventListener("keydown", function(key) {
         if (key.keyCode == 17 || key.keyCode == 67) {
           cam.setAttribute("camera", "userHeight", cam.getComputedAttribute("camera").userHeight == 1 ? .3 : 1);
+        }
+        if (key.keyCode == 69) {
+          for (var i = 0; i < foods.length; i++) {
+            foods[i].setAttribute("food", "amount", foods[i].getComputedAttribute("food").maxAmount);
+          }
         }
       });
     </script>
