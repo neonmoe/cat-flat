@@ -13,6 +13,9 @@ AFRAME.registerComponent("catai", {
     alive: { default: true }
   },
   init: function() {
+    this.el.addEventListener("click", function() {
+      this.el.dispatchEvent(new CustomEvent("meow"));
+    });
   },
   tick: function(time, delta) {
     var position = this.el.getAttribute("position");
@@ -37,6 +40,9 @@ AFRAME.registerComponent("catai", {
         (this.data.activity != "eating" && this.data.hunger < this.data.hungerThreshold) ||
         // Currently eating but no food in current target food cup
         (this.data.activity == "eating" && this.data.targetFood == null)) {
+      if (Math.random() < 0.2) {
+        this.el.dispatchEvent(new CustomEvent("meow"));
+      }
       var activityReconsidered = false;
       this.data.boredness = 0;
       if (this.data.hunger < this.data.hungerThreshold) {
@@ -98,7 +104,7 @@ AFRAME.registerComponent("catai", {
       this.el.setAttribute("catmove", "targetReachDistance", 0.1);
     }
 
-    // Test if dead
+    // Die if dead
     if (this.data.hunger <= 0) {
       this.data.alive = false;
       this.el.setAttribute("catmove", "targetPosition", {x: position.x, z: position.z});

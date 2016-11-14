@@ -4,9 +4,13 @@ Cat Flat is a brutally realistic virtual reality simulation game, about a large 
 
 \* by aiming at the bowl and clicking or just gazing for a bit in VR.
 
-Other
------
+Credits
+-------
 This project uses [A-Frame](https://aframe.io/) which is great and makes WebVR dev very similar to normal web dev.
+
+The sounds are from Freesound.org by the following people:
+* [Meows by theshaggyfreak](http://freesound.org/people/theshaggyfreak/sounds/274989/)
+* [Noms by niwki](http://freesound.org/people/niwki/sounds/162822/)
 
 License
 -------

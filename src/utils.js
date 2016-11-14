@@ -32,7 +32,7 @@ function spawnCat(position, rotation) {
   var hunger = 0.8 + Math.random() * 1.2;
   spawnEntity([["ply-model", "src: #Cat"], ["position", position],
               ["rotation", rotation], ["scale", {x: 0.02, y: 0.02, z: 0.02}],
-              ["catmove", ""], ["catanim", ""],
+              ["sound", "src: #meow" + Math.floor(Math.random() * 4) + "; on: meow"], ["catmove", ""], ["catanim", ""],
               ["catai", "hungerDelta: " + hungerDelta +
                         ";eatingSpeed: " + eatingSpeed +
                         ";boredDelta: " + boredDelta +
@@ -69,7 +69,7 @@ function spawnFood(position, rotation) {
   spawnedFoodPositions.push(position);
   rotation = rotation || {x: 0, y: Math.floor(Math.random() * 8) * 45, z: 0};
   spawnEntity([["collada-model", "#Food"], ["position", {x: position.x, y: 0.0249, z: position.z}],
-              ["rotation", rotation], ["food", ""]]);
+              ["rotation", rotation], ["food", ""], ["sound", "src: #nom; volume: 0.1; on: nom"]]);
   spawnEntity([["collada-model", "#FoodCup"], ["position", position],
               ["rotation", rotation], ["foodcup", ""]]);
 }
